@@ -8,7 +8,6 @@ import java.io.Closeable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -350,21 +349,12 @@ public class TestResourceManager implements Closeable {
     }
 
     private static TestResourceComparisonInfo prepareTestResourceComparisonInfo(TestResourceClassEntry entry) {
-        Map<String, Object> args;
+        Map<String, String> args;
         if (entry.configAnnotation != null) {
             args = new HashMap<>(entry.args);
             args.put("configAnnotation", entry.configAnnotation.annotationType().getName());
-            Method[] annotationAttributes = entry.configAnnotation.annotationType().getDeclaredMethods();
-            for (Method annotationAttribute : annotationAttributes) {
-                try {
-                    args.put(annotationAttribute.getName(), annotationAttribute.invoke(entry.configAnnotation));
-                } catch (Exception e) {
-                    throw new RuntimeException("Unable to extract configuration values for annotation "
-                            + entry.configAnnotation.annotationType().getName(), e);
-                }
-            }
         } else {
-            args = new HashMap<>(entry.args);
+            args = entry.args;
         }
 
         return new TestResourceComparisonInfo(entry.testResourceLifecycleManagerClass().getName(), entry.getScope(),
@@ -658,7 +648,7 @@ public class TestResourceManager implements Closeable {
     }
 
     public record TestResourceComparisonInfo(String testResourceLifecycleManagerClass, TestResourceScope scope,
-            Map<String, Object> args) {
+            Map<String, String> args) {
 
     }
 
