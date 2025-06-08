@@ -14,7 +14,7 @@ public class StartTestWithAttribute {
 
     @Test
     public void test1() {
-        assertEquals("bar", ConfigProvider.getConfig().getValue("attributeValue", String.class));
+        assertEquals("foo", ConfigProvider.getConfig().getValue("attributeValue", String.class));
         assertTrue(Counter.startCounter.get() <= 1);
     }
 
