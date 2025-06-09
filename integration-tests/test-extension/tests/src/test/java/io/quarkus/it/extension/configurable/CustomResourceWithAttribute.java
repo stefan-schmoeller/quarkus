@@ -1,4 +1,4 @@
-package io.quarkus.it.extension;
+package io.quarkus.it.extension.configurable;
 
 import java.lang.annotation.*;
 

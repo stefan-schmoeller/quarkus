@@ -1,7 +1,8 @@
-package io.quarkus.it.extension;
+package io.quarkus.it.extension.configurable;
 
 import java.util.Map;
 
+import io.quarkus.it.extension.Counter;
 import io.quarkus.test.common.QuarkusTestResourceConfigurableLifecycleManager;
 
 public class ConfigurableLifecycleManager
