@@ -9,19 +9,19 @@ import org.junit.jupiter.api.Test;
 import io.quarkus.it.extension.Counter;
 import io.quarkus.test.junit.QuarkusTest;
 
-@CustomResourceWithAttribute(value = "bar")
+@CustomResourceWithAttribute(value = "foo")
 @QuarkusTest
-public class EndTestWithAttribute {
+public class WithAttributeStartTest {
 
     @Test
     public void test1() {
-        assertEquals("bar", ConfigProvider.getConfig().getValue("attributeValue", String.class));
-        assertTrue(Counter.endCounter.get() <= 1);
+        assertEquals("foo", ConfigProvider.getConfig().getValue("attributeValue", String.class));
+        assertTrue(Counter.startCounter.get() <= 1);
     }
 
     @Test
     public void test2() {
-        assertTrue(Counter.endCounter.get() <= 1);
+        assertTrue(Counter.startCounter.get() <= 1);
     }
 
 }
